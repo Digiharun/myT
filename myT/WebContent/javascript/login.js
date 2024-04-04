@@ -34,24 +34,24 @@ function checkAll(){
 		return ok;
 	}
 	return ok;				
-}
+};
 
 $(document).ready(function () {
-    // 아이디 클릭시 이미지 변경
-    //$("body form .lpage .main .id").click(function () {
-    //    $(this).find("img").css({ 'opacity': '1' });
-    //});
-    //$("body form .lpage .main .id").focusout(function () {
-    //    $(this).find("img").css({ 'opacity': '0.5' });
-    //});
+   //  아이디 클릭시 이미지 변경
+    $("body form .lpage .main .position .id .input").focus(function () {
+       $("body form .lpage .main .position .id").find("img").css({ 'opacity': '1' });
+    });
+    $("body form .lpage .main .id").focusout(function () {
+       $(this).find("img").css({ 'opacity': '0.5' });
+    });
 
-    // 비밀번호 클릭시 이미지 변경
-    //$("body form .lpage .main .pwd").click(function () {
-    //    $(this).find("img").css({ 'opacity': '1' });
-    //});
-    //$("body form .lpage .main .pwd").focusout(function () {
-    //    $(this).find("img").css({ 'opacity': '0.5' });
-    //});
+   //  비밀번호 클릭시 이미지 변경
+    $("body form .lpage .main .position .pwd .input").focus(function () {
+       $("body form .lpage .main .position .pwd").find("img").css({ 'opacity': '1' });
+    });
+    $("body form .lpage .main .pwd").focusout(function () {
+       $(this).find("img").css({ 'opacity': '0.5' });
+    });
 
     // 체크 버튼 클릭시
     var id = 'false';
