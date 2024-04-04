@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="55">
+<insert id="insert2" parameterType="green.myT.dto.User"> 
+    INSERT INTO USER VALUES (#{uid}, #{uname}, #{unum}) 
+</insert>
+
+<insert id="insert1" parameterType="green.myT.dto.CarPickup"> 
+    INSERT INTO CAR_PICKUP VALUES (NULL, #{user_id}, #{air_resv_detail_no}, #{car_no}, #{guest_num}, #{pick_date}, #{pick_time}, #{arrv_addr}, #{pay_no}, SYSDATE()) 
+</insert>
+
+</mapper>

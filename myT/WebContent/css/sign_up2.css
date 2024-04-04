@@ -1,0 +1,93 @@
+
+.title2{
+	width: 250px;
+	height: 60px;
+	margin-top: 70px;
+	margin-left: 250px;
+}
+.tab{
+    z-index: 1;
+    position: relative;
+	float: left;
+	width: 120px;
+	height: 75px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(90, 90, 90, 0.7);
+	text-align: center;
+	
+}
+
+.login{
+   	background-color: #263e50;
+}
+
+.sign{
+	margin-left: 3px;
+} 		
+
+.tab2{
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 20px;
+	color: white;
+ }
+
+.tab3{
+	font-size: 20px;
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+
+	#box{
+    z-index: 2;
+    position: relative;
+	width: 800px;			
+		height: 1040px;
+		margin: 2px auto;
+		border: 2px lightgray solid;
+		border-radius: 20px;
+	    background-color: white;
+	    box-shadow: 0px 0px 5px rgba(90, 90, 90, 0.7);
+	}
+	.title1{
+		font-size: 30px;
+		margin: 50px auto;
+ 		text-align: center;
+ 	}
+
+	table tr td{
+		font-size: 16px;
+		font-weight: bold;
+ 	}
+	
+	input{
+		height: 35px;
+		font-size: 16px;
+		color: grey;
+		padding-left: 10px;
+		border-radius: 3px;
+		border-width: 1px;
+
+	}
+
+	.input2{
+		font-size: 15px;		
+		padding-left: 0px;
+		text-align: center
+	}
+	select{
+		width: 93px;
+ 		height: 40px;
+		text-align: center
+
+	}
+
+	#msg{
+		font-size: 14px; 
+		color: red;
+	}
+
+
