@@ -35,9 +35,9 @@
     <!--  큐앤에이 목록 -->
     <jsp:include page="qna2.jsp" />
     <!-- 글쓰기 페이지 -->
-    <div class="qna-write-container">
+    <!-- <div class="qna-write-container">
         <jsp:include page="qna_write.jsp" />
-    </div>
+    </div> -->
   </form>
 
 <footer>

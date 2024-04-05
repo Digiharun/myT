@@ -19,7 +19,7 @@
 <body>
     <!-- 글쓰기 페이지 -->
     <form>
-        <div class="qna-write">
+        <!-- <div class="qna-write">
             <ul class="write">
                 <li>
                     <label for="qnaType">분류</label>
@@ -30,7 +30,7 @@
                         <option value="3">예약취소</option>
                         <option value="4">다이어리</option>
                     </select>
-                </li>
+                </li> -->
                 <!-- <li><label for="subject">제목</label><input type="text" name="subject" id="subject"></li>
                 <li>
                     <p class="tit">휴대전화</p>
