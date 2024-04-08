@@ -45,7 +45,7 @@
       </div>
       <div id="search_review">
         <div class="search">
-           <div class="search2_title" style='width: 400px;' >항공기 일정 선택 </div><div class="search2_title" style="margin-left: 140px">픽업공항</div>
+           <div class="search2_title" style='width: 400px;' >항공기 일정 선택 </div><div class="search2_title" style="margin-left: 180px">픽업공항</div>
           <div class="search2_title" style="margin-left: 80px">픽업일자</div><div class="search2_title" style="margin-left: 80px">픽업시간</div>
         </div>
         <div class="search3">
@@ -63,11 +63,11 @@
 	//	검색된 내역이 없을 경우
 	if( (list == null) || (list.size() == 0) ){
 %>
-			<!--option value = '0' >예약된 항공권 내역이 없습니다.</option-->
-			<option value = '1' >KE725	서울/인천 >> 오사카	2024-04-05	10:00 >> 11:45</option>
+			<option value = '0' >예약된 항공권 내역이 없습니다.</option>		
+			<!--option value = '1' >KE725	서울/인천 >> 오사카	2024-04-05	10:00 >> 11:45</option>
 			<option value = '4' >KE726	오사카 >> 서울/인천	2024-04-07	15:30 >> 17:15</option>
 			<option value = '5' >KE725	서울/인천 >> 샌프란시스코	2024-05-19	07:00 >> 21:45</option>
-			<option value = '6' >KE726	샌프란시스코 >> 서울/인천	2024-05-30	08:30 >> 23:15</option>
+			<option value = '6' >KE726	샌프란시스코 >> 서울/인천	2024-05-30	08:30 >> 23:15</option-->
 <%
 	}
 	//	검색된 내역이 있을 경우
