@@ -56,6 +56,9 @@
 				<div>축제 둘러보기, 계획 짜기, 티켓팅까지 마이티에서 한 번에 해결하세요<img id="wink" src="img/wink.png"/></div>
 			</div>
 		<!-- 게시물 -->
+			<div class="datediv">
+				<button id="datepicker">관람일</button>
+			</div>
 			<div class="card">
 				<%
 				List<Festival> list = (List<Festival>) request.getAttribute("result");
@@ -71,18 +74,25 @@
 			        String end = endparts[0] +"년 "+ endparts[1] +"월 "+ endparts[2] +"일";
 					if(i == 0){
 				%>
+				<div class="name"><%=festv.getFestv_name()%></div>
+				<div class="ename"><%=festv.getFestv_ename()%></div>
 				<img src= "<%=festv.getFestv_title()%>" class="festvtitle"/>
 				<div class="slidermom2">
-					<div class="name"><%=festv.getFestv_name()%></div>
-					<div class="ename"><%=festv.getFestv_ename()%></div>
+					<div class="infomom">장소</div>
+					<div class="infoson"><%=festv.getFestv_place()%></div>
 					<div class="infomom">축제시작</div>
 					<div class="infoson"><%=start%></div>
 					<div class="infomom">축제종료</div>
 					<div class="infoson"><%=end%></div>
-					<div class="infomom">장소</div>
-					<div class="infoson"><%=festv.getFestv_place()%></div>
+					<div class="infomom">성인요금</div>
+					<div class="infoson"><%=festv.getFestv_aprice()%></div>
+					<div class="infomom">미성년자요금</div>
+					<div class="infoson"><%=festv.getFestv_cprice()%></div>
+					
 				</div>
-				<div class="detail"><%=festv.getFestv_detail()%></div>
+				<div class="detail"><%=festv.getFestv_detail()%>
+				</div>
+					<div id="seemore">...더보기</div>
 				<div class="btnmom">
 					<a href="#infobox" class=infotab>상세정보</a>
 					<a href="#postlistbox" class="postlisttab">축제후기</a>
@@ -127,14 +137,13 @@
 					<td class='td'><div class='userId'><%= pgs.getUser_id() %></div></td>
 					<td class='td'><div class='festTime'><%=pgs.getFest_rtime().substring(0,10)%></div></td></tr>
 					<tr class='conttr'><td class='td' colspan="3"><div class='cont'><%=pgs.getFest_rcont()%></div></td>
-					<td class='td'><div><a id='modbtn'>수정하기</a></div>
-								   <div><a id='delbtn'>삭제하기</a></div></td></tr>
+					<td class='td'><div><a id='delbtn' onclick="deleterow(<%= pgs.getRv_no() %>, '<%= pgs.getUser_id() %>' )" >삭제하기</a></div></td></tr>
 				<%
 				String writer_id = pgs.getUser_id();
 				}
 				%>				
 					</table>
-						<a href="postwrite.jsp" onclick=function()>
+						<a href="postwrite.jsp">
 							<div class="write">
 								후기쓰기
 							</div>
@@ -255,7 +264,7 @@
 			<form>
 				<h3>티켓팅</h3>
 				<div>예약일시</div>
-				<input type="text" id="datepicker" />
+				<input type="text" id="datepicker0000000" />
 				<div>티켓가격</div>
 				<input type="radio" id="tck_price" name="tck_price" value="" />
 				<div>티켓매수</div>
@@ -285,22 +294,9 @@ tck_count	int(11)	YES
 	<footer>
 		<jsp:include page="footer.jsp" />
 	</footer>
-	<!-- 
+	
 <script>
-	$(document).ready(function(){
-		$('#delbtn').click(function(){
-			var user_id = < user_id%>;
-			var writer_id = <pgs.getUser_id()%>;
-			alert("clicked!");
-			
-			if (user_id == writer_id){
-				window.location.href = postdelete.jsp?rv_no=<=pgs.rv_no%>&user_id=<=user_id%>;
-			} else {
-				alert("로그인 아이디와 작성자 아이디가 다릅니다.");
-			}			
-		});
-	});
+	
 </script>
-	 -->
 </body>
 </html>

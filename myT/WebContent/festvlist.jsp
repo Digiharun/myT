@@ -51,7 +51,7 @@
 	<section>
 		<div class="cardpage">
 			<div class="cardtitle">
-				<div>myT Festival List</div>
+				<div>myT 축제 리스트</div>
 				<div>마이티에서 제공하는 세계 각국, 국내 곳곳의 화려한 페스티벌!</div>
 				<div>축제 둘러보기, 계획 짜기, 티켓팅까지 마이티에서 한 번에 해결하세요<img id="wink" src="img/wink.png"/></div>
 			</div>
