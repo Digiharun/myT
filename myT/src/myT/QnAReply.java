@@ -11,39 +11,41 @@ package myT;
 // | reply_date  | datetime    | NO   |     | NULL    |                |
 // +-------------+-------------+------+-----+---------+----------------+
 
-private int replyId;
-private int qnaId;
-private String replyTitle;
-private String replyText;
+public class QnAReply {
+    private int replyId;
+    private int qnaId;
+    private String replyTitle;
+    private String replyText;
 
-public int getReplyId() {
-    return replyId;
-}
+    public int getReplyId() {
+        return replyId;
+    }
 
-public int getQnaId() {
-    return qnaId;
-}
+    public int getQnaId() {
+        return qnaId;
+    }
 
-public String getReplyTitle() {
-    return replyTitle;
-}
+    public String getReplyTitle() {
+        return replyTitle;
+    }
 
-public String getReplyText() {
-    return replyText;
-}
+    public String getReplyText() {
+        return replyText;
+    }
 
-public void setReplyId(int replyId) {
-    this.replyId = replyId;
-}
+    public void setReplyId(int replyId) {
+        this.replyId = replyId;
+    }
 
-public void setQnaId(int qnaId) {
-    this.qnaId = qnaId;
-}
+    public void setQnaId(int qnaId) {
+        this.qnaId = qnaId;
+    }
 
-public void setReplyTitle(String replyTitle) {
-    this.replyTitle = replyTitle;
-}
+    public void setReplyTitle(String replyTitle) {
+        this.replyTitle = replyTitle;
+    }
 
-public void setReplyText(String replyText) {
-    this.replyText = replyText;
+    public void setReplyText(String replyText) {
+        this.replyText = replyText;
+    }
 }
