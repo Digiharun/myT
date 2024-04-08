@@ -2,6 +2,7 @@ package myT;
 
 import java.sql.*;
 import java.util.*;
+import myT.QnA;
 
 public class QnADB {
     //	qna
