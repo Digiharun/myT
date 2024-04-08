@@ -66,5 +66,26 @@ public class QnADB {
         return arry;
     }
 
-    public ArrayList<QnA> selectRow()
+
+
+    // QnA 답변을 데이터베이스에 추가
+    public void connectDB() throws Exception {
+
+		Class.forName("com.mysql.jdbc.Driver");
+		//	db, jsp, html 모두 한글 인코딩을 넣어야 하며
+		//	그래도 안되면 마지막으로 한글 인코딩 mydb?characterEncoding=utf8을 써줘야 함
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/planner?characterEncoding=utf8&useSSL=false", "root", "1234");
+
+		if(conn == null)
+			throw new Exception("mydb 데이터베이스로 연결할 수 없습니다<br>");
+
+		stmt = conn.createStatement();
+	}
+	
+    // 데이터베이스 연결 해제
+	public void closeDB() throws Exception {
+		stmt.close();
+		conn.close();
+	}
+
 }
