@@ -1,32 +1,27 @@
 section{
     display: flex;
     justify-content: center;
-    margin-top: 30px;
- }
- 
- section .cardpage{
-    
-    margin: 50px auto;
+}
 
- }
+section .cardpage{
+	margin: 30px auto;
+}
  
 section .cardpage .cardtitle{
 	width: 100%;
-	height: 230px;
+	height: 200px;
     text-align: center;
-    /*background-color: #dc8b35;*/
-    background-image: url("../img/festvlistbg.png"); 
+    /* background-color: #dc8b35; */
+    /* background-image: url("../img/festvlistbg.png"); */ 
     background-size: 100% 100%;
     margin: 40px auto;
 }
-
+ 
 section .cardpage .cardtitle div:first-child{
 	width: 800px;
 	height: 80px;
-	font-size: 37px;
+	font-size: 42px;
 	font-weight: bold;
-	color: White;
-	padding-top: 40px;	
 	margin: 0 auto;
 }
 
@@ -34,8 +29,7 @@ section .cardpage .cardtitle div:nth-child(2),
 section .cardpage .cardtitle div:nth-child(3){
 	width: 800px;
 	height: 50px;
-	font-size: 22px;
-	color: White;
+	font-size: 27px;
 	margin: 0 auto;
 }
 
@@ -44,14 +38,22 @@ section .cardpage .cardtitle div:nth-child(3) img{
 	height: 20px;
 } 
 
+section .cardpage .datediv{
+	display: inline-block;
+	width: 200px;
+	height: 1000px; 
+	background-color: azure;
+}
+
  section .cardpage .card{
+ display: inline-block;
     width: 800px;
     min-height: 800px;
     padding: 20px;
     margin: 0 auto;
     margin-top: 10px;
-    border: 1px solid lightgray;
-    border-radius: 5px;
+/*    border: 1px solid lightgray;
+    border-radius: 5px; */
 }
 
 section .cardpage .card .festvtitle {
@@ -65,10 +67,18 @@ section .cardpage .card .slidermom2 {
 	margin-left: 20px;
 }
 
-section .cardpage .card .slidermom2 .ename{
+section .cardpage .card .name{
+	display: inline-block;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+section .cardpage .card .ename{
+	display: inline-block;
 	width: 200px;
-	padding-bottom: 10px;
-	border-bottom: 1px solid black; 
+	font-size: 20px;
+	color: gray;
+	padding-bottom: 10px; 
 }
 
 section .cardpage .card .slidermom2 .infomom{
@@ -82,7 +92,21 @@ section .cardpage .card .slidermom2 .infoson{
 
 section .cardpage .card .detail{
 	width: 800px;	
+	min-height: 100px;
+    line-height: 1.7;
 	margin-top: 20px;
+}
+section .cardpage .card .hidedetail{
+	display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+section .cardpage .card .detail #seemore{
+	display: inline-block;
+	cursor: pointer;
 }
 
 section .cardpage .card .btnmom{
@@ -91,9 +115,11 @@ section .cardpage .card .btnmom{
 
 section .cardpage .card .btnmom > a{
 	display: inline-block;
-	width: 100px;
-	height: 30px;
+	width: 120px;
+	height: 40px;
 	text-align: center;
+	font-size: 20px;
+	background-color: lightgray;
 	padding-top: 5px;
 	border-top: 1px solid lightgray;
 	border-left: 1px solid lightgray;
@@ -134,11 +160,11 @@ section .cardpage .card .postlistbox table{
 }
 
 section .cardpage .card .postlistbox table tr:nth-child(2n){
-	background-color: #FFECCC;
+	
 }	
 
 section .cardpage .card .postlistbox table .td{
-	border-bottom : 1px solid lightgray;
+	border-bottom : 1px solid gray;
 	padding: 5px;
 }
 
@@ -196,7 +222,6 @@ section .cardpage .card .postlistbox table .cont{
 	padding-right: 120px;
 }
 
-section .cardpage .card .postlistbox table #modbtn,
 section .cardpage .card .postlistbox table #delbtn{
 	display: inline-block;
 	width: 75px;
@@ -267,9 +292,8 @@ body .ticketingbg{
 	top: 0%;
 	width: 100%;
 	height: 100%;
-	opacity: 0.8;
+	background-color: rgba(220, 220, 220, 0.7); 
 	z-index: 1;
-	background-color: lightgray;
 }
 
 body .ticketingbg .ticketing{
@@ -310,57 +334,9 @@ body .ticketingbg .ticketing form .ui-datepicker {
 }
 
 body .ticketingbg .ticketing form .ui-datepicker-calendar {
-    width: 50%; /*달력 내부 넓이*/
+    width: 50%; /*�떖�젰 �궡遺� �꼻�씠*/
 }
 
 body .ticketingbg .ticketing form #tck_price{
 	
 }
-
-
-/*
-section .cardpage .card .slidermom1 .imgslider{
-	display: flex;
-	justify-content: center;
-	position: relative;
-	align-items: center;
-	width: 500px;    
-	height: 400px;
-	overflow: hidden; 
-	transition: height 0.1s, filter 0.5s;
-	margin-top: 10px;
-}
-
-section .cardpage .card .slidermom1 .imgslider .imgs{
-   width: 500px;
-   height: 400px;
-}
-
-section .cardpage .card .slidermom1 .imgslider .lt{
-   position: absolute;   
-   top: 40%;
-   left: 5%;
-   height: 90px;	
-   cursor: pointer;
-   transition: height 0.1s, filter 0.5s;
-   opacity: 0.7;
-}
-
-section .cardpage .card .slidermom1 .imgslider .gt{  
-   position: absolute;
-   top: 40%;
-   left: 85%;
-   height: 90px;
-   cursor: pointer;
-   filter: brightness(130%);
-   transition: height 0.1s, filter 0.5s;
-   opacity: 0.7;
-   margin-top: 10px;
-}
-
-section .cardpage .card .slidermom1 .imgslider .lt:hover,
-section .cardpage .card .slidermom1 .imgslider .gt:hover{
-   height: 100px;
-   opacity: 1;
-}
-*/
