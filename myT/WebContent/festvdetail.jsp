@@ -122,7 +122,7 @@
 				out.println("<td class='td'><div class='huserId'>작성자</div></td>");
 				out.println("<td class='td'><div class='hfestrTime'>작성일시</div></td></tr>");
 //				out.println("<td class='td'><div class='festCnt'>조회수</div></td>");
-//				out.println("<td class='td'><div class='festRstars'>별점</div></td></tr>");
+//ff				out.println("<td class='td'><div class='festRstars'>별점</div></td></tr>");
 
 //				out.println(pgs.getFest_rtime());
 //				String rtime = pgs.getFest_rtime();
