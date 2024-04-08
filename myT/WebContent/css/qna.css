@@ -74,7 +74,7 @@ form .qna .qnat .dbtitle{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1000px;
+    width: 980px;
     height: 100%;
 }
 
@@ -84,6 +84,7 @@ form .qna .qnat .dbwriter{
     align-items: center;
     width: 100px;
     height: 100%;
+    margin-right: 15px;
 }
 
 form .qna .qnat .dbdate{
@@ -92,6 +93,7 @@ form .qna .qnat .dbdate{
     align-items: center;
     width: 100px;
     height: 100%;
+    margin-right: 5px;
 }
 
 /* 큐앤에이 답글 ( 하단 ) */
@@ -121,8 +123,9 @@ form .qna .qnapage .bulletin .dbtitle{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 1000px;
+    width: 900px;
     height: 100%;
+    margin: 0 40px;
 }
 
 form .qna .qnapage .bulletin .dbwriter{
@@ -131,6 +134,7 @@ form .qna .qnapage .bulletin .dbwriter{
     align-items: center;
     width: 100px;
     height: 100%;
+    margin-right: 15px;
 }
 
 form .qna .qnapage .bulletin .dbdate{
@@ -139,6 +143,7 @@ form .qna .qnapage .bulletin .dbdate{
     align-items: center;
     width: 100px;
     height: 100%;
+    margin-right: 5px;
 }
 
 /* 큐앤에이 댓글에 대한 답글 */
@@ -186,42 +191,48 @@ form .qna .qnapage .reply .dbreply{
 }
 
 /* 페이지네이션 */
-.qnapage .paging {
+.qna .paging {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 100px;
 }
 
-.qnapage .paging .pagination {
+.qna .paging .pagination {
     display: flex;
     list-style: none;
 }
 
-.qnapage .paging .pagination a {
+.qna .paging .pagination a {
     margin: 0 5px;
     padding: 5px 10px;
     text-decoration: none;
     border-radius: 3px;
-    background-color: #ffeccc;
-    color: #333;
+    background-color: rgba(231, 244, 255, 0.7);
+    color: #263e50;
     cursor: pointer;
 }
 
-.qnapage .paging .pagination a.active {
-    background-color: #dc8b35;
+.qna .paging .pagination a.active {
+    background-color: #263e50;
     color: white;
 }
 
-.qnapage .paging .pagination a:hover {
-    background-color: #dc8b35;
+.qna .paging .pagination a:hover {
+    background-color: #263e50;
     color: white;
 }
+
+.qna .paging .pagination a.arrow {
+    background-color: transparent;
+    color: gray;
+}
+
 
 
 /* 큐앤에이 글쓰기 */
-form .qna-write{
+/* form .qna-write{
     display: block;
     text-align: center;
     width: 1300px;
@@ -248,10 +259,10 @@ form .qna-write .write{
 form .qna-write .write > li {
     position: relative;
     padding: 0 0 0 90px;
-}
+} */
 
 /* .board-write > li > input[type="password"] */
-.write > li > select {
+/* .write > li > select {
     width: 450px;
     height: 30px;
     border: 0;
@@ -267,4 +278,4 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-}
+} */
