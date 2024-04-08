@@ -8,6 +8,10 @@
     Statement stmt = null;
 %>
 
+<% import java.sql.*; %>
+<% import.myT.QnA; %>
+
+
 <head>
     <meta charset="utf-8">
     <title>myT</title>
@@ -18,6 +22,12 @@
 
 <body>
     <form>
+        <jsp:useBean id="qna" class="myT.QnADB" />
+        <%
+            ArrayList<QnA> qnaArray = qnadb.selectAll();
+            QnA qna = null;
+            list_cnt = qnaArray.size();
+        %>
         <!--  큐앤에이 목록 -->
         <div class="qna">
             <div class="tplus">
@@ -42,6 +52,13 @@
             </div>
             <!-- 큐앤에이 페이지 -->
             <div class="qnapage">
+                <%
+                    if(list_cnt == 0){
+                        out.println("<div class='dbtitle'>검색된 내용이 없습니다</div>");
+                    }
+                    for(int i = 0; i < list_cnt; i++){
+                        qna = qnaArray.get(i);
+                %>
                 <!-- 큐앤에이 댓글 디비에서 불러와서 만들기 -->
                 <div class="bulletin">
                     <div class="dbstate">
@@ -49,16 +66,18 @@
                         <span>답변완료</span>
                     </div>
                     <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
+                        <span><%= setQnaTitle() %></span>
                     </div>
                     <div class="dbwriter">
-                        <span>gahyun010305</span>
+                        <span><%= setQnaId() %></span>
                     </div>
                     <div class="dbdate">
-                        <span>2024.03.18</span>
+                        <span><%= setQnaDate() %></span>
                     </div>
                 </div>
-                
+                <%
+                    }
+                %>
                 <!-- 큐앤에이 답글 -->
                 <div class="reply">
                     <span class="dbtext">플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문</span>
@@ -67,278 +86,6 @@
                             <img src="img/reply.png" width="20px" height="20px">
                         </div>
                         <span class="dbreply">플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문플래너 작성에 대한 질문</span>
-                    </div>
-                </div>
-    
-                <!-- 큐앤에이 댓글 -->
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
-                    </div>
-                </div>
-                <div class="bulletin">
-                    <div class="dbstate">
-                        <!-- 미답변 | 답변완료 -->
-                        <span>답변완료</span>
-                    </div>
-                    <div class="dbtitle">
-                        <span>플래너 작성에 대한 질문</span>
-                    </div>
-                    <div class="dbwriter">
-                        <span>gahyun010305</span>
-                    </div>
-                    <div class="dbdate">
-                        <span>2024.03.18</span>
                     </div>
                 </div>
             </div>

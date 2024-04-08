@@ -46,10 +46,11 @@ public class QnADB {
 
                 // 데이터베이스에서 가져온 데이터를 객체에 저장 ( 결과에서 데이터 추출하여 QnA 객체에 설정 )
                 qna.setQnaId(rs.getInt("qna_id"));
-                qna.setQnaTitle(rs.getString("user_id"));
+                qna.setUserId(rs.getString("user_id"));
                 qna.setQnaTitle(rs.getString("qna_title"));
                 qna.setQnaText(rs.getString("qna_text"));
                 qna.setQnaPic(rs.getString("qna_pic"));
+                qna.setQnaDate(rs.getString("qna_date"));
 
                 // ArrayList에 객체 추가
                 arry.add(qna);

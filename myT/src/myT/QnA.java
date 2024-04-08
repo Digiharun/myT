@@ -18,6 +18,7 @@ public class QnA {
     private String qnaTitle;
     private String qnaText;
     private String qnaPic;
+    private String qnaDate;
 
     public int getQnaId() {
         return qnaId;
@@ -33,6 +34,10 @@ public class QnA {
 
     public String getQnaText() {
         return qnaText;
+    }
+
+    public String getQnaDate() {
+        return qnaDate;
     }
 
     public String getQnaPic() {
@@ -57,5 +62,9 @@ public class QnA {
 
     public void setQnaPic(String qnaPic) {
         this.qnaPic = qnaPic;
+    }
+
+    public void setQnaDate(String qnaDate) {
+        this.qnaDate = qnaDate;
     }
 }
