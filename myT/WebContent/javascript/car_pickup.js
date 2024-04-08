@@ -111,9 +111,9 @@ $(document).ready(function(){
 		var pick_date = tmp.replaceAll('-', '');
 		
 		
-//		console.log("pick_date :" + pick_date);
-//		console.log("city :" + city);
-//		console.log("pick_time :" + pick_time);
+		console.log("pick_date :" + pick_date);
+		console.log("city :" + city);
+		console.log("pick_time :" + pick_time);
 		
 		//	인원수 input index : 5인승-> 7, 8인승-> 11, 12인승 ->15
 		var guest_num = $('#per_num_' + capacity).val();

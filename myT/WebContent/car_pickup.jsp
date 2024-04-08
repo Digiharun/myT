@@ -64,6 +64,7 @@
 	if( (list == null) || (list.size() == 0) ){
 %>
 			<option value = '0' >예약된 항공권 내역이 없습니다.</option>		
+			
 			<!--option value = '1' >KE725	서울/인천 >> 오사카	2024-04-05	10:00 >> 11:45</option>
 			<option value = '4' >KE726	오사카 >> 서울/인천	2024-04-07	15:30 >> 17:15</option>
 			<option value = '5' >KE725	서울/인천 >> 샌프란시스코	2024-05-19	07:00 >> 21:45</option>
