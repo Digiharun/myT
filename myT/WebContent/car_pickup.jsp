@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html;charset=utf-8" pageEncoding="utf-8" %>
+<%@ page import="green.myT.dto.AirResvList" %>
+<jsp:useBean id="airdb" class="myT.AirResvListDB" />
 
 <%
   //	로그인한 user_id를 hidden_id에 셋팅하기 위한 작업
@@ -23,11 +25,6 @@
   <title>공항픽업 신청</title>
 </head>
 
-<!-- 구s글폰트 다운 받아서 적용함 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cute+Font&family=Nanum+Gothic&display=swap" rel="stylesheet">
--->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="javascript/car_pickup.js"></script>
 <link href="css/default.css" rel="stylesheet" type="text/css">
@@ -48,107 +45,69 @@
       </div>
       <div id="search_review">
         <div class="search">
-           <div class="search2_title">도시 선택</div><!--div class="search2_title" style="margin-left: 100px">차량 종류</div-->
-          <div class="search2_title" style="margin-left: 125px">픽업일자</div><div class="search2_title" style="margin-left: 100px">픽업시간</div>
-           <input type='hidden' class='hidden' name='hidden_city' id='hidden_city' value='서울/인천'> 
-           <input type='hidden' class='hidden' name='hidden_id' id='hidden_id' value='<%= user_id %>' > 
+           <div class="search2_title" style='width: 400px;' >항공기 일정 선택 </div><div class="search2_title" style="margin-left: 140px">픽업공항</div>
+          <div class="search2_title" style="margin-left: 80px">픽업일자</div><div class="search2_title" style="margin-left: 80px">픽업시간</div>
         </div>
         <div class="search3">
-          <div class="air_0 air_city" id="city_dept"><ul><li id="city_dept2">서울/인천</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="img/city.png" class="img_size"></li></ul></div>
-          <input type="text" class="datepicker" id="dept_d" maxlength="10" placeholder="YYYY-MM-DD"  />
-          <select name='pick_time' class='car_gbn' id='pick_time' style="width: 110px; height: 28px; margin-top: 15px; margin-left: 75px; text-align: center;">
-          	<option value='6' >6시(오전)</option>
-          	<option value='7' >7시(오전)</option>
-          	<option value='8' >8시(오전)</option>
-          	<option value='9' >9시(오전)</option>
-           	<option value='10' >10시(오전)</option>
-          	<option value='11' >11시(오전)</option>
-          	<option value='12' >12시(오후)</option>
-          	<option value='13' >1시(오후)</option>
-          	<option value='14' >2시(오후)</option>
-          	<option value='15' >3시(오후)</option>
-          	<option value='16' >4시(오후)</option>
-          	<option value='17' >5시(오후)</option>
-          	<option value='18' >6시(오후)</option>
-          	<option value='19' >7시(오후)</option>
-          	<option value='20' >8시(오후)</option>
-          	<option value='21' >9시(오후)</option>
-           	<option value='22' >10시(오후)</option>
-          	<option value='23' >11시(오후)</option>
-          	<option value='24' >12시(자정)</option>
-          </select>
-          <input  type="button" class="btn btn_search" id="btn_search2" onclick="search_review()" value="검색">
+		  <select name='pick_air' class='car_gbn2' id='pick_air' >
+
+<% 
+	//	항공편 예약 내역을 조회해서 select로 뿌려줌
+	List<AirResvList> list = airdb.selectRow( user_id );
+	out.println("user_id: " + user_id + " size: " + list.size());
+	
+	String hidden_city = "서울/인천";
+	String hidden_date = "";
+	String hidden_time = "";
+	
+	//	검색된 내역이 없을 경우
+	if( (list == null) || (list.size() == 0) ){
+%>
+			<!--option value = '0' >예약된 항공권 내역이 없습니다.</option-->
+			<option value = '1' >KE725	서울/인천 >> 오사카	2024-04-05	10:00 >> 11:45</option>
+			<option value = '4' >KE726	오사카 >> 서울/인천	2024-04-07	15:30 >> 17:15</option>
+			<option value = '5' >KE725	서울/인천 >> 샌프란시스코	2024-05-19	07:00 >> 21:45</option>
+			<option value = '6' >KE726	샌프란시스코 >> 서울/인천	2024-05-30	08:30 >> 23:15</option>
+<%
+	}
+	//	검색된 내역이 있을 경우
+	else{
+		String opt = "";
+		
+		for(int i = 0; i < list.size(); i++){
+			AirResvList data = list.get(i);
+			
+			//	가장 먼저 보이는 select의 도착 도시를 hidden_city로 셋팅함
+			if(i == 0){
+				hidden_city = data.getArrv_city();
+				hidden_date = data.getFlight_date();
+				hidden_time = data.getArrv_time();
+			}
+
+			String date = data.getFlight_date().substring(4, 6) + "월 " + data.getFlight_date().substring(6, 8) + "일";
+
+			opt = "KE" + data.getPlane_no() + "\t" + data.getDept_city()  + " >> " + data.getArrv_city() + "\t" + data.getFlight_date() + "\t" + data.getDept_time() + " >> " + data.getArrv_time();
+%> 
+          	<option value=<%= data.getPlane_seq() %> ><%= opt %></option>
+ 
+<%
+		}
+	}
+%>
+		  </select>
+          
+ 		<div class="car_0"><label class="car_1" id="car_city" ></label></div>
+ 		<div class="car_0"><label class="car_1" id="car_date"></label></div>
+ 		<div class="car_0"><label class="car_1" id="car_time"></label></div>
+        <!--input  type="button" class="btn btn_search" id="btn_search2" value="검색"-->
+
+        <input type='hidden' class='hidden' name='hidden_id' id='hidden_id' value='<%= user_id %>' > 
+ 		<input type='hidden' name='hidden_city' id='hidden_city' value='<%= hidden_city %>' > 
+ 		<input type='hidden' name='hidden_city' id='hidden_date' value='<%= hidden_date %>' > 
+ 		<input type='hidden' name='hidden_time' id='hidden_time' value='<%= hidden_time %>' > 
+
         </div> 
 
-        <!-- sel_city : 검색창(search)에서 도시를 선택하면 나타나는 data 선택창 -->
-        <div class="sel_city" value="1">
-          <div class="city_head">
-            <div class="city_title">도시</div>
-            <div class="close_box" id="close_city"><img src="img/close.png"></div>
-          </div>
-
-          <!-- city_cont : 도시 리스트 div -->
-          <div class="city_cont">
-            <div class="city_cont2">
-              <!-- div/dl/dt/dd -->
-              <dl class="city_data1" value="1">
-                <dt>국내</dt>
-                <dd>서울/인천</dd>
-                <dd>서울/김포</dd>
-                <dd>부산</dd>
-                <dd>제주도</dd>
-                <dd>대구</dd>
-                <dd>광주</dd>
-              </dl>
-              <dl class="city_data2" value="2">
-                <dt>동남아</dt>
-                <dd>홍콩</dd>
-                <dd>마카오</dd>
-                <dd>방콕</dd>
-                <dd>푸켓</dd>
-                <dd>싱가포르</dd>
-                <dd>타이페이</dd>
-                <dd>세부</dd>
-                <dd>호치민</dd>
-              </dl>
-              <dl class="city_data3" value="3">
-                <dt>일본</dt>
-                <dd>도쿄</dd>
-                <dd>오사카</dd>
-                <dd>후쿠오카</dd>
-                <dd>삿포로</dd>
-                <dd>오키나와</dd>
-              </dl>
-              <dl class="city_data4" value="4">
-                <dt>유럽</dt>
-                <dd>파리</dd>
-                <dd>런던</dd>
-                <dd>로마</dd>
-                <dd>뮌헨</dd>
-                <dd>취리히</dd>
-              </dl>
-              <dl class="city_data5" value="5">
-                <dt>미주</dt>
-                <dd>로스앤젤레스</dd>
-                <dd>뉴욕</dd>
-                <dd>샌프란시스코</dd>
-                <dd>시애틀</dd>
-                <dd>시카고</dd>
-                <dd>하와이</dd>
-                <dd>토론토</dd>
-                <dd>벤쿠버</dd>
-              </dl>
-              <dl class="city_data6" value="6">
-                <dt>중국</dt>
-                <dd>상하이</dd>
-                <dd>북경</dd>
-                <dd>청도</dd>
-                <dd>광저우</dd>
-              </dl>
-            </div> <!--city_cont2-->
-          </div> <!--city_cont-->
-        </div> <!-- sel_city  end : 검색창(search)에서 도시를 선택하면 나타나는 data 선택창 -->
-     
      </div><!--  search_review -->
     </div> <!-- bgtop_car -->
 
@@ -160,52 +119,55 @@
 <jsp:useBean id="carInfodb" class="myT.CarInfoDB" />
 
 <%
-String city = request.getParameter("city");
-//out.println("city : " + city );
-
-if(city == null)
-	city = "서울/인천";
-
-ArrayList<CarInfo> rvArray = carInfodb.selectRow(city);
-
-//ArrayList<CarInfo> rvArray = carInfodb.selectRow("서울/인천");
-CarInfo info = null;
-
-//	조회된 내역이 없을 때
-if(rvArray.size() == 0){
- 	out.println("<div class='div_blank'>검색된 내용이 없습니다</div>");
-}
-
-for (int i=0; i< rvArray.size(); i++){
-	info = rvArray.get(i);
-	int capacity = info.getCapacity();
-
-	int amount = info.getPrice() * 2;
+	String city = request.getParameter("city");
+	//out.println("city : " + city );
 	
-	if(capacity == 12)	
-		out.println("<div class='car_info' id='car_info_" + capacity + "'>");	//	car_info start
+	if( hidden_city.equals("") )
+		city = "서울/인천";
 	else
-		out.println("<div class='car_info' style='margin-right: 23px;' id='car_info_" + capacity + "'>");	//	car_info start
+		city = hidden_city;
 	
-	out.println("<div class='car_title'>" + capacity + "인승 차량</div>");		//	car_title start-end
-	out.println("<div class='car_picture'><img src='img/car_" + capacity + ".jpg' class='img_size_" + capacity + "'></div>");	//	car_picture start-end
-	out.println("<div class='car_detail'>");	//	car_detail start
-	out.println("<table border='0' cellspacing='0' class='tbl_car'>");
-	out.println("<tr><td class='td_1'><label>픽업 금액</label></td><td class='td_2'><input type='text' value=" + String.format("%,d",info.getPrice()) + " class='car_input' readonly='true' disabled>원</td></tr>");
-	out.println("<tr><td class='td_1'><label>인원수</label></td> ");   
-	out.println("<td class='td_2'><button type='button' class='btn_minus_p' id='btn_minus_p_" + capacity + "'>-</button>");
-	out.println("<input type='number' class='person' id='per_num_" + capacity + "' maxlength='1' value='1' readonly='true' />");   
-	out.println("<button type='button' class='btn_plus_p' id='btn_plus_p_" + capacity + "' onclick='limit_person(" + capacity + ")\' >+</button></td></tr>");
-	out.println("<tr><td class='td_1'><label>도착 주소</label></td> ");
-	out.println("<td class='td_2'><input type='text' name='addr' id='addr_" + capacity + "' placeholder='호텔 주소를 입력하세요' style='width: 250px' maxlength=50>");
-	out.println("<input type='hidden' name='car_no' id='car_no_" + capacity + "' value='" + info.getCarNo() + "' ></td></tr>");
-	 
-	out.println("<tr><td  colspan='2'><input type='button' class='btn btn_pickup' id='btn_pickup_" + capacity + "' value='픽업 신청'></td></tr> ");
-	out.println("</table>  ");  
-	out.println("</div>  ");  	//	car_detail end
-	out.println("</div>  ");	//	car_info end
- }    
-
+//	if(city == null)
+//		city = "서울/인천";
+	
+	ArrayList<CarInfo> rvArray = carInfodb.selectRow(city);
+	
+	CarInfo info = null;
+	
+	//	조회된 내역이 없을 때
+	if(rvArray.size() == 0){
+	 	out.println("<div class='div_blank'>검색된 내용이 없습니다</div>");
+	}
+	
+	for (int i=0; i< rvArray.size(); i++){
+		info = rvArray.get(i);
+		int capacity = info.getCapacity();
+	
+		int amount = info.getPrice() * 2;
+		
+		if(capacity == 12)	
+			out.println("<div class='car_info' id='car_info_" + capacity + "'>");	//	car_info start
+		else
+			out.println("<div class='car_info' style='margin-right: 23px;' id='car_info_" + capacity + "'>");	//	car_info start
+		
+		out.println("<div class='car_title'>" + city + " " + capacity + "인승</div>");		//	car_title start-end
+		out.println("<div class='car_picture'><img src='img/car_" + capacity + ".jpg' class='img_size_" + capacity + "'></div>");	//	car_picture start-end
+		out.println("<div class='car_detail'>");	//	car_detail start
+		out.println("<table border='0' cellspacing='0' class='tbl_car'>");
+		out.println("<tr><td class='td_1'><label>픽업 금액</label></td><td class='td_2'><input type='text' value=" + String.format("%,d",info.getPrice()) + " class='car_input' readonly='true' disabled>원</td></tr>");
+		out.println("<tr><td class='td_1'><label>인원수</label></td> ");   
+		out.println("<td class='td_2'><button type='button' class='btn_minus_p' id='btn_minus_p_" + capacity + "'>-</button>");
+		out.println("<input type='number' class='person' id='per_num_" + capacity + "' maxlength='1' value='1' readonly='true' />");   
+		out.println("<button type='button' class='btn_plus_p' id='btn_plus_p_" + capacity + "' onclick='limit_person(" + capacity + ")\' >+</button></td></tr>");
+		out.println("<tr><td class='td_1'><label>도착 주소</label></td> ");
+		out.println("<td class='td_2'><input type='text' name='addr' id='addr_" + capacity + "' placeholder='호텔 주소를 입력하세요' style='width: 250px' maxlength=50>");
+		out.println("<input type='hidden' name='car_no' id='car_no_" + capacity + "' value='" + info.getCarNo() + "' ></td></tr>");
+		 
+		out.println("<tr><td  colspan='2'><input type='button' class='btn btn_pickup' id='btn_pickup_" + capacity + "' value='픽업 신청'></td></tr> ");
+		out.println("</table>  ");  
+		out.println("</div>  ");  	//	car_detail end
+		out.println("</div>  ");	//	car_info end
+	 }    
 %>
    </div><!-- car_list -->
   </div><!-- bg3 -->

@@ -12,6 +12,7 @@ public class AirResvList {
 	String hour;
 	String e_lastnm;	//	탑승자 영문 명
 	String e_firstnm;	//	탑승자 영문 명
+	String level;
 	int price;
 	String child;
 	String resv_date;	//	예약 입력일자
@@ -81,6 +82,13 @@ public class AirResvList {
 	}
 	public void setE_firstnm(String e_firstnm) {
 		this.e_firstnm = e_firstnm;
+	}
+	
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
 	}
 	public int getPrice() {
 		return price;

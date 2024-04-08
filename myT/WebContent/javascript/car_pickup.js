@@ -16,111 +16,64 @@ function limit_person(cnt){
 	}
 }
 
-function search_review(){
-	var tag = document.getElementsByTagName('input');
-
-	var city = tag[1].value;
-//	var city = "seoul";
-	console.log("city : " + city);
-	
-	//	ajax로 할 경우 js가 정상작동 안하는 경우가 많아서 재로드 하는 식으로 변경	
-	location.href = "car_pickup.jsp?city=" + city;
-	
-}
-
 
 $(document).ready(function(){
 	//	로그인 상태일 때만 글쓰기, 저장 버튼 활성화되게 함
 	console.log("('#hidden_id').val() :" + $('#hidden_id').val());
-//	if($('#hidden_id').val() == ""){
-//		$('#btn_insert').hide();
-//		$('#btn_insert2').hide();
-//		
-//	}
-//	else{
-//		$('#btn_insert').show();
-//		$('#btn_insert2').show();
-//	}
+
+	
+	//	select 선택시
+	$(document).on('change', '#pick_air', function(){ 
+		console.log("changed: " + $(this).val());
+
+		//	선택된 시간값
+		var sel_text = $("#pick_air option:selected").text();
+		//KE726	오사카 >> 서울/인천	2024-04-07	15:30 >> 17:15
+		console.log("sel_text: " + sel_text);
 		
-
-	//	도시 선택창 닫고 관련 셋팅하기
-	function close_city_box(){
-		//	도시 선택창 닫힘
-		$('.sel_city').hide();
-
-		//	출발지를 선택된 도시로 수정
-		$('#city_dept').css({
-			"background-color" : "#f5f5f5"
-		});
-	}
-
-	//	출발지 버튼이 눌릴 때
-	$('#city_dept').click(function(){
-
-		//	출발지/도착지 버튼 하늘색상으로 변경
-		$(this).css({
-			"background-color" : "#e7f4ff" 
-		});
-
-		$('#city_arrv').css({	//	기본색으로 셋팅
-			"background-color" : "#f5f5f5" 
-		});
+		//	뒤에서 5자리 잘라서 시간 가져옴 15:30
+		var time = sel_text.slice(-5);
+		console.log("time: " + time);
 		
-		//	출발 도시 선택창 뜸
-		$('.city_title').text("출발도시/공항");
-		$('.sel_city').css({
-			"margin-left" : "0px" 
-		});
-		$('.sel_city').show();
-
-		console.log("출발지 선택 : " + $('.sel_city').attr("value"));
-	});
-	
-	//	도시 선택 창의 클로즈 버튼이 눌릴 때
-	$('#close_city').click(function(){
-		close_city_box();
-	});
-	
-	
-	$('dd').click(function(){	
-
-		//	console.log("부모의 value : " + $(this).parent().attr('value'));
-		//	$(this).parent().attr('value') -> 부모의 value값으로 해당 도시가 어느 지역인지 확인함
-		//	1: 국내, 2: 동남아, 3: 일본, 4: 유럽, 5: 미주, 6: 중국
-		//	1-3 (국내의 인덱스 1은 부산임)
-		//console.log("부모의 value : " + $(this).parent().attr('value') + "도시 인덱스 : " + $(this).index());
-
-		//	출발지를 선택된 도시로 수정
-		$('#city_dept2').text($(this).text());
+		//	일자 가져옴 2024-03-10
+		var date = sel_text.slice(-25, -15);
+		console.log("date: " + date);
 		
-		//	숨겨진 input text hidden_city 선택된 도시 셋팅하기
-		$('#hidden_city').val($(this).text());
+		//	>> 문자열 찾음 -> 찾은 문자열 위치에서 4칸을 더 간 위치가 도시 위치임
+		var idx = sel_text.indexOf(' >> ');
+		console.log("idx: " + idx);
+		
+		//	서울/인천	2024-04-07	15:30 >> 17:15
+		var tmp_city = sel_text.substr(idx + 4);
+		console.log("tmp_city: " + tmp_city);
+		
+		//	2024-의 -위치를 찾아옴 -> space_idx -5를 해야 도착 도시명의 마지막 위치가 됨
+		var end_idx = tmp_city.indexOf('-');
+		console.log("end_idx: " + end_idx);
+		
+		end_idx = end_idx - 5;
+		
+		var city = sel_text.substr(idx + 4, end_idx);
+		console.log("city: " + city);
 
-		//	도시 선택창 닫고 관련 셋팅하기
-		close_city_box();
-	});
-	
-	//	날짜 클릭시 달력나옴
-	$(function() {
-		$(".datepicker").datepicker({
-			dateFormat:'yy-mm-dd',
-			monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			dayNamesMin:['일','월','화','수','목','금','토'],
-			changeMonth:true, // 월변경가능
-			changeYear:true,  // 년변경가능
-			showMonthAfterYear:true // 년 뒤에 월표시
-	     });
-		//초기값을 오늘 날짜로 설정해줘야 합니다.
-	    $('.datepicker').datepicker('setDate', 'today');
-	    
-     });
+		$('#hidden_city').val(city);
+		$('#hidden_date').val(date);
+		$('#hidden_time').val(time);
 
-	//	날짜 클릭시 기존의 열린 도시와 인원수 화면 닫기
-	$('#dept_d').click(function(){
-		//	열린 화면 닫기
-		//	혹시 도시 선택창이 열려있으면 먼저 닫고
-		close_city_box();
+		$('#car_city').text(city);
+		$('#car_date').text(date);
+		$('#car_time').text(time);
+
+		var div_car_list = document.getElementById("car_list");
+		
+		$.ajax({ // key value 형식
+			url : "car_pickup_search.jsp?city=" + city , 
+			success : function(re){
+				div_car_list.innerHTML = re;
+			}
+		});
 	});
+
 	
 	// 탑승인원 - 버튼 누룰 때
 	$(document).on('click', '.btn_minus_p', function(){ 
@@ -147,66 +100,26 @@ $(document).ready(function(){
 		
 		//	btn_pickup_5
 		var capacity = Number(tagId.substr(11, 2));
-		//console.log("눌리 capacity " + capacity);
+		console.log("눌리 capacity " + capacity);
 		
-		var tag = document.getElementsByTagName('input');
-
-		//	1:서울, 2:whistl76, 3: 날짜, 
-		//	5: 금액, 6:인원수 7: 주소, 8: 차량번호 (9 픽업버튼) 
-		//	10: 금액, 11:인원수 12: 주소, 13: 차량번호 (14 픽업버튼) 
-		//	15: 금액, 16:인원수 17: 주소, 18: 차량번호 (19 픽업버튼) 
-//		console.log("1: " + tag[1].value);
-//		console.log("2: " + tag[2].value);
-//		console.log("3: " + tag[3].value);
-//
-//		console.log("5: " + tag[5].value);
-//		console.log("6: " + tag[6].value);
-//		console.log("7: " + tag[7].value);
-//		console.log("8: " + tag[8].value);
-//
-//		console.log("10: " + tag[10].value);
-//		console.log("11: " + tag[11].value);
-//		console.log("12: " + tag[12].value);
-//		console.log("13: " + tag[13].value);
-//
-//		console.log("15: " + tag[15].value);
-//		console.log("16: " + tag[16].value);
-//		console.log("17: " + tag[17].value);
-//		console.log("18: " + tag[18].value);
-
 		//	선택된 시간값
-		var pick_time = $("#pick_time option:selected").val();
-		//console.log("pick_time: " + pick_time);
+		var pick_time = $("#hidden_time").val();
+		var city = $("#hidden_city").val();
+		var id = $("#hidden_id").val();
 		
-		var city = tag[1].value;
-		var id = tag[2].value;
-		
-		//	로그인 아이디 확인(로그인했는지 확인)해서 로그인 전이면 로그인 화면으로 이동
-		//	로그인이 아니라 항공기 예약 기록이 있어야지만 신청 가능함
-//		if(id == ""){
-//			alert("로그인 후 신청하세요");
-//			location.href = "login.jsp";
-//		}
-		
-		var tmp = tag[3].value;	//	2023-01-01
+		var tmp = $("#hidden_date").val();
 		var pick_date = tmp.replaceAll('-', '');
-		//console.log("pick_date :" + pick_date);
 		
-		if(capacity == 5)
-			var num = 0;
-		else if(capacity == 8)
-			var num = 2;
-		else if(capacity == 12)
-			var num = 3;
 		
-		//	금액 input index : 5인승-> 5, 8인승-> 9, 12인승 ->13
-		//var price = tag[capacity + num].value;
+		console.log("pick_date :" + pick_date);
+		console.log("city :" + city);
+		console.log("pick_time :" + pick_time);
+		
+		//	인원수 input index : 5인승-> 7, 8인승-> 11, 12인승 ->15
+		var guest_num = $('#per_num_' + capacity).val();
 
-		//	인원수 input index : 5인승-> 6, 8인승-> 10, 12인승 ->14
-		var guest_num = tag[capacity + num + 1].value;
-
-		//	주소 input index : 5인승-> 7, 8인승-> 11, 12인승 ->15
-		var addr = tag[capacity + num + 2].value;
+		//	주소 input index : 5인승-> 8, 8인승-> 12, 12인승 ->16
+		var addr = $('#addr_' + capacity).val();
 
 		//	주소 입력값 체크
 		if(addr.length == 0){
@@ -215,14 +128,19 @@ $(document).ready(function(){
 			return;
 		}
 
-		var car_no = tag[capacity + num + 3].value;
+		var car_no = $('#car_no_' + capacity).val();
 		
 		//	결제와 예약된 항공권 부분은 아직 안함
-		var pay_no = "";
 		var air_no = 2000;
+		pick_time = "15:30";
+		pick_date = "20240501";
+
+		console.log("guest_num:" + guest_num);
+		console.log("addr:" + addr);
+		console.log("car_no:" + car_no);
 
 		//	픽업 신청 jsp 호출 : car_pickup_ins.jsp
-		var page = "car_pickup_ins.myt?menu=car&gbn=2&id=" + id + "&air_no=" + air_no + "&car_no=" + car_no + "&guest_num=" + guest_num + "&pick_date=" + pick_date + "&pick_time=" + pick_time + "&addr=" + addr + "&pay_no=" + pay_no;
+		var page = "car_pickup_ins.myt?menu=car&gbn=2&id=" + id + "&air_no=" + air_no + "&car_no=" + car_no + "&guest_num=" + guest_num + "&pick_date=" + pick_date + "&pick_time=" + pick_time + "&addr=" + addr ;
 		//console.log(page);
 		
 		$.ajax({ // key value 형식
