@@ -18,7 +18,12 @@
   }
 %>
 
+<html>
 
+<head>
+  <meta charset="utf-8">
+  <title>공항픽업 신청</title>
+</head>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="javascript/car_pickup.js"></script>
